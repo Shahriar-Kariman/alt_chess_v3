@@ -16,7 +16,7 @@ class king extends piece{
       )
     )
     this.object.name = this.type
-    this.legaMoves = this.getLegalMoves()
+    this.legal_moves = []
   }
   // Try not calling this function outside of the piece as much as possible
   // use updateLegalMoves instead
@@ -46,7 +46,7 @@ class king extends piece{
     return squares
   }
   updateLegalMoves(){
-    this.legaMoves = this.getLegalMoves()
+    this.legal_moves = this.getLegalMoves()
   }
 }
 

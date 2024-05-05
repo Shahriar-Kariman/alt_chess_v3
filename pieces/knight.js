@@ -15,7 +15,7 @@ class knight extends piece{
       )
     )
     this.object.name = this.type
-    this.legaMoves = this.getLegalMoves()
+    this.legal_moves = []
   }
   getLegalMoves(){
     const {column,row} = this.current_square
@@ -57,7 +57,7 @@ class knight extends piece{
     return squares
   }
   updateLegalMoves(){
-    this.legalMoves = this.getLegalMoves()
+    this.legal_moves = this.getLegalMoves()
   }
 }
 

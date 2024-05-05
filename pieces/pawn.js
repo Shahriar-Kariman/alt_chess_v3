@@ -15,7 +15,7 @@ class pawn extends piece{
       )
     )
     this.object.name = this.type
-    this.legaMoves = this.getLegalMoves()
+    this.legal_moves = []
   }
   getLegalMoves(){
     const {column, row} = this.current_square
@@ -28,7 +28,7 @@ class pawn extends piece{
     return squares
   }
   updateLegalMoves(){
-    this.legaMoves = this.getLegalMoves()
+    this.legal_moves = this.getLegalMoves()
   }
 }
 

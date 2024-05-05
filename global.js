@@ -7,6 +7,16 @@ const translate = (col,row)=>{
   return {x,z}
 }
 
+// To check if the square clicked on has a piece on it
+const checkSquare = (col,row)=>{
+  for (let index = 0; index < pieceList.length; index++) {
+    const piece = pieceList[index];
+    if(piece.currentSquare.column===col && piece.currentSquare.row===row){
+      return piece
+    }
+  }
+}
+
 const squareGeometry = new THREE.BoxGeometry(1, 0.2, 1)
 squareGeometry.name = "squareGeometry"
 const whiteSquareMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff })
@@ -37,6 +47,7 @@ lights.add(ambientLight,directionalLight)
 
 export {
   translate,
+  checkSquare,
   squareGeometry,
   whiteSquareMaterial,
   blackSquareMaterial,
