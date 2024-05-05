@@ -1,0 +1,53 @@
+import * as THREE from 'three'
+import piece from '../piece'
+import { darkPieceMaterial, kingPieceGeometry, lightPieceMaterial } from '../global'
+import square from '../square'
+
+class king extends piece{
+  constructor(is_light){
+    this.type = 'K'
+    const s = is_light ? new square('e',1) : new square('e',8)
+    super(
+      color,
+      s,
+      new THREE.Mesh(
+        kingPieceGeometry,
+        is_light ? lightPieceMaterial : darkPieceMaterial
+      )
+    )
+    this.object.name = this.type+'_'+this.current_square.column+this.current_square.row
+    this.legaMoves = this.getLegalMoves()
+  }
+  // Try not calling this function outside of the piece as much as possible
+  // use updateLegalMoves instead
+  getLegalMoves(){
+    const {column,row} = this.current_square
+    const columns = []
+    const rows = []
+    const currentColCharCode = column.charCodeAt(0)
+    columns.push(
+      String.fromCharCode(currentColCharCode-1),
+      String.fromCharCode(currentColCharCode),
+      String.fromCharCode(currentColCharCode+1),
+    )
+    rows.push(row, row+1, row-1)
+    // some of the rows and columns will not make any sense but
+    // since they cant be clicke on its fine
+    const squares = []
+    columns.forEach(
+      (c)=>{
+        rows.forEach(
+          (r)=>{
+            squares.push(new square(c,r))
+          }
+        )
+      }
+    )
+    return squares
+  }
+  updateLegalMoves(){
+    this.legaMoves = this.getLegalMoves()
+  }
+}
+
+export default king

@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 
 class notation{
   constructor(column, row){
