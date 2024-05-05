@@ -76,3 +76,5 @@ class rock extends piece{
     this.legal_moves = this.getLegalMoves()
   }
 }
+
+export default rock
