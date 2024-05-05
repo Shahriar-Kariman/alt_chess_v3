@@ -49,3 +49,8 @@ function game_loop() {
 }
 
 game_loop()
+
+export {
+  renderer,
+  camera,
+}

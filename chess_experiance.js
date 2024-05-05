@@ -1,8 +1,28 @@
 import * as THREE from 'three'
 import { board } from './board'
 import { lights, translate } from './global'
+import { camera, renderer } from './main'
 
 const scene = new THREE.Scene()
+
+// ray caster
+const raycaster = new THREE.Raycaster
+
+const on_cast = (event)=>{
+  const coords = new THREE.Vector2(
+    (event.clientX / renderer.domElement.clientWidth) * 2 - 1,
+    -((event.clientY / renderer.domElement.clientHeight) * 2 - 1)
+  )
+  raycaster.setFromCamera(coords, camera)
+
+  const intersections = raycaster.intersectObjects(b1.squares.children, true)
+
+  if(intersections.length>0){
+    console.log(intersections[0].object.name)
+  }
+}
+
+document.addEventListener('mousedown',on_cast)
 
 // lights
 scene.add(lights)
