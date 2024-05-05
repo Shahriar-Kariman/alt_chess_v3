@@ -5,8 +5,8 @@ class pieces{
     this.pieceList = []
     this.pieces = new THREE.Group()
   }
-  checkSquare(square){
-    const {column, row} = square
+  checkSquare(s_notation){
+    const {column, row} = s_notation
     let piece
     this.pieceList.forEach(
       (p) => {
