@@ -1,7 +1,8 @@
 import * as THREE from 'three'
 import piece from '../piece'
-import { checkSquare, darkPieceMaterial, lightPieceMaterial, rockPieceGeometry } from '../global'
+import { darkPieceMaterial, lightPieceMaterial, rockPieceGeometry } from '../global'
 import { notation } from '../square'
+import { b1_pieces } from '../chess_experiance'
 
 const traverse = (max, is_vertical, direction, current_col_code, current_row, squares)=>{
   if(is_vertical){
@@ -10,7 +11,7 @@ const traverse = (max, is_vertical, direction, current_col_code, current_row, sq
         String.fromCharCode(current_col_code+i*direction),
         row
       )
-      const p = checkSquare(s.column,s.row)
+      const p = b1_pieces.checkSquare(s)
       if(p===undefined){
         squares.push(s)
       }
@@ -29,7 +30,7 @@ const traverse = (max, is_vertical, direction, current_col_code, current_row, sq
         String.fromCharCode(current_col_code),
         row+i*direction
       )
-      const p = checkSquare(s.column,s.row)
+      const p = b1_pieces.checkSquare(s)
       if(p===undefined){
         squares.push(s)
       }

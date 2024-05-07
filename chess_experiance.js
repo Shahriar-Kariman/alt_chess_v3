@@ -2,8 +2,17 @@ import * as THREE from 'three'
 import { board } from './board'
 import { lights, translate } from './global'
 import { camera, renderer } from './main'
+import pieces from './pieces'
 
 const scene = new THREE.Scene()
+
+const game_state = {
+  is_white_turn: true,
+  selected_piece: null
+}
+
+// Pieces
+const b1_pieces = new pieces()
 
 // ray caster
 const raycaster = new THREE.Raycaster
@@ -19,6 +28,23 @@ const on_cast = (event)=>{
 
   if(intersections.length>0){
     console.log(intersections[0].object.name)
+    let [column, row] = intersections[0].object.name
+    row = parseInt(row)
+    const piece = b1_pieces.checkSquare(column,row)
+    if(piece!==undefined){
+      if(piece.is_light==game_state.is_white_turn){
+        game_state.selected_piece=piece
+      }
+      else if(game_state.selected_piece!==null){
+        // remove the piece from the board
+        // move piece to the clicked square
+      }
+    }
+    else if(game_state.selected_piece!==null){
+      // if legal move
+      // move the piece to the square
+      // else unselect the piece
+    }
   }
 }
 
@@ -60,5 +86,7 @@ const b1 = new board(translate)
 scene.add(b1.squares)
 
 export {
-  scene
+  scene,
+  b1,
+  b1_pieces
 }

@@ -1,6 +1,7 @@
 import * as THREE from 'three'
-import { bishopPieceGeometry, checkSquare, darkPieceMaterial, lightPieceMaterial } from '../global'
+import { bishopPieceGeometry, darkPieceMaterial, lightPieceMaterial } from '../global'
 import { notation } from '../square'
+import { b1_pieces } from '../chess_experiance'
 
 
 const bishopMovement = (current_col_code, row, squares)=>{
@@ -12,7 +13,7 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row+i
       )
       squares.push(s)
-      if(checkSquare(s.column,s.row) !== undefined) up_left=false
+      if(b1_pieces.checkSquare(s) !== undefined) up_left=false
     }
     if(up_right){
       const s = new notation(
@@ -20,7 +21,7 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row+i
       )
       squares.push(s)
-      if(checkSquare(s.column,s.row) !== undefined) up_right=false
+      if(b1_pieces.checkSquare(s) !== undefined) up_right=false
     }
     if(down_left){
       const s = new notation(
@@ -28,7 +29,7 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row-i
       )
       squares.push(s)
-      if(checkSquare(s.column,s.row) !== undefined) down_left=false
+      if(b1_pieces.checkSquare(s) !== undefined) down_left=false
     }
     if(down_right){
       const s = new notation(
@@ -36,7 +37,7 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row-i
       )
       squares.push(s)
-      if(checkSquare(s.column,s.row) !== undefined) down_right=false
+      if(b1_pieces.checkSquare(s) !== undefined) down_right=false
     }
   }
   squares.push(new notation(column, row))

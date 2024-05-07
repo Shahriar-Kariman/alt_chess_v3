@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { checkSquare, darkPieceMaterial, lightPieceMaterial, queenPieceGeometry } from '../global'
+import { darkPieceMaterial, lightPieceMaterial, queenPieceGeometry } from '../global'
 import { rockMovement } from './rock'
 import { bishopMovement } from './bishop'
 
