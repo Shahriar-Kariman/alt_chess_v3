@@ -5,7 +5,6 @@ import piece from '../piece'
 
 class knight extends piece{
   constructor(is_light, start_square){
-    this.type = 'N_'+start_square.column
     super(
       is_light,
       start_square,
@@ -14,6 +13,7 @@ class knight extends piece{
         is_light ? lightPieceMaterial : darkPieceMaterial
       )
     )
+    this.type = 'N_'+start_square.column
     this.object.name = this.type
     this.legal_moves = []
   }

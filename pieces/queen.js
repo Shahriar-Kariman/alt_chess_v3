@@ -5,7 +5,6 @@ import { bishopMovement } from './bishop'
 
 class queen extends piece{
   constructor(is_light, start_square, queen_number){
-    this.type = 'Q_'+queen_number
     super(
       is_light,
       start_square,
@@ -14,6 +13,7 @@ class queen extends piece{
         is_light ? lightPieceMaterial : darkPieceMaterial
       )
     )
+    this.type = 'Q_'+queen_number
     this.object.name = this.type
     this.legal_moves = []
   }

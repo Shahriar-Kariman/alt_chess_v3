@@ -45,7 +45,6 @@ const bishopMovement = (current_col_code, row, squares)=>{
 
 class bishop{
   constructor(is_light, start_square){
-    this.type = 'B_'+start_square.column
     super(
       is_light,
       start_square,
@@ -54,6 +53,7 @@ class bishop{
         is_light ? lightPieceMaterial : darkPieceMaterial
       )
     )
+    this.type = 'B_'+start_square.column
     this.object.name = this.type
     this.legal_moves = []
   }

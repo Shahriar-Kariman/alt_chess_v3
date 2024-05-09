@@ -5,7 +5,6 @@ import { notation } from '../square'
 
 class king extends piece{
   constructor(is_light){
-    this.type = 'K'
     const s = is_light ? new notation('e',1) : new notation('e',8)
     super(
       is_light,
@@ -15,8 +14,10 @@ class king extends piece{
         is_light ? lightPieceMaterial : darkPieceMaterial
       )
     )
+    this.type = 'K'
     this.object.name = this.type
     this.legal_moves = []
+    this.updateLegalMoves()
   }
   // Try not calling this function outside of the piece as much as possible
   // use updateLegalMoves instead
@@ -47,6 +48,7 @@ class king extends piece{
   }
   updateLegalMoves(){
     this.legal_moves = this.getLegalMoves()
+    console.log(this.legal_moves)
   }
 }
 

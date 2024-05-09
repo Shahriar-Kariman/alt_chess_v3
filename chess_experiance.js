@@ -3,6 +3,7 @@ import { board } from './board'
 import { lights, translate } from './global'
 import { camera, renderer } from './main'
 import pieces from './pieces'
+import { notation } from './square'
 
 const scene = new THREE.Scene()
 
@@ -34,16 +35,44 @@ const on_cast = (event)=>{
     if(piece!==undefined){
       if(piece.is_light==game_state.is_white_turn){
         game_state.selected_piece=piece
+        game_state.selected_piece.updateLegalMoves()
       }
       else if(game_state.selected_piece!==null){
-        // remove the piece from the board
-        // move piece to the clicked square
+        // if legal move
+        if(
+          game_state.selected_piece.legal_moves.some(
+            (n)=>{
+              return n.column===column && n.row==row
+            }
+          )
+        ){
+          // remove the piece from the board
+          b1_pieces.removePiece(piece)
+          // move piece to the clicked square
+          game_state.selected_piece.move(new notation(column,row))
+          game_state.is_white_turn = !game_state.is_white_turn
+          game_state.selected_piece = null
+        }
       }
     }
     else if(game_state.selected_piece!==null){
       // if legal move
-      // move the piece to the square
+      if(
+        game_state.selected_piece.legal_moves.some(
+          (n)=>{
+            return n.column===column && n.row==row
+          }
+        )
+      ){
+        // move the piece to the square
+        game_state.selected_piece.move(new notation(column,row))
+        game_state.is_white_turn = !game_state.is_white_turn
+        game_state.selected_piece = null
+      }
       // else unselect the piece
+      else{
+        game_state.selected_piece = null
+      }
     }
   }
 }
@@ -84,6 +113,9 @@ scene.add(stars)
 // board
 const b1 = new board(translate)
 scene.add(b1.squares)
+
+// adding pieces to the scene
+scene.add(b1_pieces.objects)
 
 export {
   scene,

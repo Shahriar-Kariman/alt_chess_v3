@@ -58,7 +58,6 @@ const rockMovement = (current_col_code, row, squares)=>{
 
 class rock extends piece{
   constructor(is_light, start_square){
-    this.type = 'R_'+start_square.column
     super(
       is_light,
       start_square,
@@ -67,6 +66,7 @@ class rock extends piece{
         is_light ? lightPieceMaterial : darkPieceMaterial
       )
     )
+    this.type = 'R_'+start_square.column
     this.object.name = this.type
     this.legal_moves = []
   }

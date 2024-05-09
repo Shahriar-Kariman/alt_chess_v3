@@ -5,7 +5,6 @@ import { notation } from '../square'
 
 class pawn extends piece{
   constructor(is_light, start_square){
-    this.type = 'p_'+start_square.column
     super(
       is_light,
       start_square,
@@ -14,6 +13,7 @@ class pawn extends piece{
         is_light ? lightPieceMaterial : darkPieceMaterial
       )
     )
+    this.type = 'p_'+start_square.column
     this.object.name = this.type
     this.legal_moves = []
   }
