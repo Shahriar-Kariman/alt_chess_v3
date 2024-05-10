@@ -13,16 +13,17 @@ class pawn extends piece{
         is_light ? lightPieceMaterial : darkPieceMaterial
       )
     )
-    this.type = 'p_'+start_square.column
+    this.type = 'p_'+start_square.column+is_light ? '_white' : '_black'
     this.object.name = this.type
     this.legal_moves = []
   }
   getLegalMoves(){
     const {column, row} = this.current_square
     const currentColCharCode = column.charCodeAt(0)
-    const squares = [new notation(column, row+1)]
+    const direction = this.is_light ? 1 : -1
+    const squares = [new notation(column, row+1*direction)]
     if(this.move_count==0){
-      squares.push(new notation(column,row+2))
+      squares.push(new notation(column,row+2*direction))
     }
     // consider saptures and special moves later
     return squares

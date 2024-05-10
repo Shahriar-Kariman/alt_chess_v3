@@ -6,17 +6,14 @@ import { b1_pieces } from '../chess_experiance'
 
 const traverse = (max, is_vertical, direction, current_col_code, current_row, squares)=>{
   if(is_vertical){
-    for (let i = 0; i < max; i++) {
+    for (let i = 1; i < max; i++) {
       const s = new notation(
         String.fromCharCode(current_col_code+i*direction),
-        row
+        current_row
       )
-      const p = b1_pieces.checkSquare(s)
+      const p = b1_pieces.checkSquare(s.column,s.row)
       if(p===undefined){
         squares.push(s)
-      }
-      else if (p.is_light==p.is_light){
-        break
       }
       else {
         squares.push(s)
@@ -25,35 +22,30 @@ const traverse = (max, is_vertical, direction, current_col_code, current_row, sq
     }
   }
   else{
-    for (let i = 0; i < max; i++) {
+    for (let i = 1; i < max; i++) {
       const s = new notation(
         String.fromCharCode(current_col_code),
-        row+i*direction
+        current_row+i*direction
       )
-      const p = b1_pieces.checkSquare(s)
+      const p = b1_pieces.checkSquare(s.column,s.row)
       if(p===undefined){
         squares.push(s)
-      }
-      else if (p.is_light==p.is_light){
-        break
       }
       else {
         squares.push(s)
         break
       }
     }
+    squares.push(new notation(String.fromCharCode(current_col_code),current_row))
   }
 }
 
 const rockMovement = (current_col_code, row, squares)=>{
-  const left = current_col_code-'a'.charCodeAt(0)+1
-  const right = 'h'.charCodeAt(0)-current_col_code+1
-  traverse(left, false, -1, current_col_code, row, squares)
-  traverse(right, false, 1, current_col_code, row, squares)
-  const down = row
-  const up = (8-row)+1
-  traverse(down, true, -1, current_col_code, row, squares)
-  traverse(up, true, 1, current_col_code, row, squares)
+  traverse(8, false, -1, current_col_code, row, squares)
+  traverse(8, false, 1, current_col_code, row, squares)
+  traverse(8, true, -1, current_col_code, row, squares)
+  traverse(8, true, 1, current_col_code, row, squares)
+  // some of the squares are going to br giberish but I do not care
 }
 
 class rock extends piece{

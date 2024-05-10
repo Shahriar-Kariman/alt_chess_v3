@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { bishopPieceGeometry, darkPieceMaterial, lightPieceMaterial } from '../global'
 import { notation } from '../square'
 import { b1_pieces } from '../chess_experiance'
+import piece from '../piece'
 
 
 const bishopMovement = (current_col_code, row, squares)=>{
@@ -13,7 +14,7 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row+i
       )
       squares.push(s)
-      if(b1_pieces.checkSquare(s) !== undefined) up_left=false
+      if(b1_pieces.checkSquare(s.column,s.row) !== undefined) up_left=false
     }
     if(up_right){
       const s = new notation(
@@ -21,7 +22,7 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row+i
       )
       squares.push(s)
-      if(b1_pieces.checkSquare(s) !== undefined) up_right=false
+      if(b1_pieces.checkSquare(s.column,s.row) !== undefined) up_right=false
     }
     if(down_left){
       const s = new notation(
@@ -29,7 +30,7 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row-i
       )
       squares.push(s)
-      if(b1_pieces.checkSquare(s) !== undefined) down_left=false
+      if(b1_pieces.checkSquare(s.column,s.row) !== undefined) down_left=false
     }
     if(down_right){
       const s = new notation(
@@ -37,13 +38,13 @@ const bishopMovement = (current_col_code, row, squares)=>{
         row-i
       )
       squares.push(s)
-      if(b1_pieces.checkSquare(s) !== undefined) down_right=false
+      if(b1_pieces.checkSquare(s.column,s.row) !== undefined) down_right=false
     }
   }
-  squares.push(new notation(column, row))
+  squares.push(new notation(String.fromCharCode(current_col_code), row))
 }
 
-class bishop{
+class bishop extends piece{
   constructor(is_light, start_square){
     super(
       is_light,
@@ -58,7 +59,7 @@ class bishop{
     this.legal_moves = []
   }
   getLegalMoves(){
-    const {column,row} = this.currentSquare
+    const {column,row} = this.current_square
     const currentColCharCode = column.charCodeAt(0)
     const squares = []
     bishopMovement(currentColCharCode, row, squares)

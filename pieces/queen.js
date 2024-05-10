@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { darkPieceMaterial, lightPieceMaterial, queenPieceGeometry } from '../global'
 import { rockMovement } from './rock'
 import { bishopMovement } from './bishop'
+import piece from '../piece'
 
 class queen extends piece{
   constructor(is_light, start_square, queen_number){
@@ -29,3 +30,5 @@ class queen extends piece{
     this.legal_moves = this.getLegalMoves()
   }
 }
+
+export default queen

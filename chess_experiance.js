@@ -9,7 +9,7 @@ const scene = new THREE.Scene()
 
 const game_state = {
   is_white_turn: true,
-  selected_piece: null
+  selected_piece: null,
 }
 
 // Pieces
@@ -51,6 +51,10 @@ const on_cast = (event)=>{
           // move piece to the clicked square
           game_state.selected_piece.move(new notation(column,row))
           game_state.is_white_turn = !game_state.is_white_turn
+          game_state.selected_piece = null
+        }
+        // else unselect the piece
+        else{
           game_state.selected_piece = null
         }
       }
